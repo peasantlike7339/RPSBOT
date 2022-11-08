@@ -46,18 +46,10 @@ try:
                     while roundResult == "":
                         roundResult = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "play-page-round-result")))
                     roundResult = roundResult.find_element(By.TAG_NAME, "span").text.strip("!YOU ")
-
-                    if (driver.find_element(By.CLASS_NAME, "play-page-round").text) == "ROUND 1":
-                        state = []
-                        state.append(pick)
-                        state.append(opponentPick)
-                        state.append(roundResult)
-  #                      print(state)
-                    else:
-                        state.append(pick)
-                        state.append(opponentPick)
-                        state.append(roundResult)
- #                       print(state)
+                    state.append(pick)
+                    state.append(opponentPick)
+                    state.append(roundResult)
+#                       print(state)
 #                    writeStateToCSV(state)
 
         if (driver.find_elements(By.XPATH,"/html/body/app-root/app-room-page/div[@class='gradient-container gradient-container--full-height']/div[@class='container container--height-adaptive']/app-playing/section[@class='play-page-final-screen']/div[@class='play-page-final-screen__container']/section[@class='play-page-final-screen__nav']/div[@class='play-page-final-screen__nav-buttons'][1]/button[@class='btn-primary']")):
@@ -67,6 +59,7 @@ try:
             state.append(finalResult)
             print(state)
             writeStateToCSV(state)
+            state =[]
             driver.find_element(By.XPATH,"/html/body/app-root/app-room-page/div[@class='gradient-container gradient-container--full-height']/div[@class='container container--height-adaptive']/app-playing/section[@class='play-page-final-screen']/div[@class='play-page-final-screen__container']/section[@class='play-page-final-screen__nav']/div[@class='play-page-final-screen__nav-buttons'][1]/button[@class='btn-primary']").click()
 except Exception as e:
     trace_back = sys.exc_info()[2]
